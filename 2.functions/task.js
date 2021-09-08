@@ -32,50 +32,73 @@ function getArrayParams(arr) {
   	max: max, 
   	avg: avg 
   };
+
 }
 
 // Задание 2
 
-//*Тот же вопрос, что и в первом задании: каким образом заполняются массивы и вызываются функции?*
+//Напишите функцию worker, которая должна находить сумму элементов массива и возвращать её ("насадка мясорубки").
 function worker(arr) {
+  let sum = 0;
 
-	let sum = 0;
-	
-	for (let i = 0; i < arr.length; i++) {
-
-		sum += arr[i];
-
-	}
+  for (let i = 0; i < arr.length; i++) {
+  	sum += arr[i];
+  }
 
   return sum;
 }
 
-//*Мы должны func менять на worker?*
+//Функция makeWork принимает входные данные: массив массивов (мясо) и функцию worker, таким образом makeWork - функция высшего порядка.
 function makeWork(arrOfArr, func) {
-	//*Какое первоначальное значение должно быть у max?*
-	let max = ?;
-	let sum = 0;
 
-	//*В цикле то, как я поняла 3 и 4 пункты. Очень прошу, измените формулировку заданий. Их невозможно понять новичку!*
-	for (let i = 0; i < arrOfArr.length; i++) {
+  let max = worker(arrOfArr[0]);
 
-		func(arr);
+  //Итерируйтесь по массиву arrOfArr с помощью цикла, выполняя worker для каждого элемента (находя сумму), и если она больше ранее найденного максимума - присваивайте max = sum.
+  for (let i = 0; i < arrOfArr.length; i++) {
 
-		sum += worker(arrOfArr[i]);
-
-		if (func(arr) > max) {
-			max = sum;
-		}
-
-	}
+  	if (worker(arrOfArr[i]) > max) {
+  		max = worker(arrOfArr[i]);
+  	}
+  }
   
   return max;
+ 
 }
 
-
-
 // Задание 3
-//Не вижу смысла даже начинать...
+
+//Попробуем реализовать другую насадку для нашей мясорубки. Для этого напишем функцию worker2 которая должна находить разность максимального и минимального значения внутри массива. Это можно интерпретировать как расстояние между минимумом и максимумом. Заметьте, что данная разность - всегда неотрицательное число.
 function worker2(arr) {
-  // Ваш код
+  let min = arr[0];
+  let max = arr[0];
+
+  for (let i = 0; i < arr.length; i++) {
+
+  	if (arr[i] < min) {
+  		min = arr[i];
+  	} 
+    if (arr[i] > max) {
+  		max = arr[i];
+  	}
+
+  }
+
+  return max - min;
+
+}
+
+//Затем используйте данную насадку как аргумент для функции makeWork.
+function makeWork(arrOfArr, func) {
+
+  let max = worker2(arrOfArr[0]);
+
+  for (let i = 0; i < arrOfArr.length; i++) {
+
+  	if (worker2(arrOfArr[i]) > max) {
+  		max = worker2(arrOfArr[i]);
+  	}
+  }
+  
+  return max;
+ 
 }
