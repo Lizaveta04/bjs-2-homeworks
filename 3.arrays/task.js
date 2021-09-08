@@ -1,11 +1,13 @@
 function compareArrays(arr1, arr2) {
   //let result;
 
-  if (arr1.length === arr2.length && arr1.every(index => arr1[index] === arr2[index])) {
-    return true;
-  } else {
-    return false;
-  }
+  //if (arr1.length === arr2.length && arr1.every(index => arr1[index] === arr2[index])) {
+    //return true;
+  //} else {
+    //return false;
+  //}
+
+  return arr1.length === arr2.length && arr1.every(index => arr1[index] === arr2[index]);
 
   //return result;
 
