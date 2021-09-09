@@ -35,7 +35,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   if (Number.isNaN(contribution) === NaN) {
   	console.log(`Параметр "Процентная ставка" содержит неправильное значение "${contribution}"`);
   } 
-
+  
   parseInt(amount);
   if (Number.isNaN(amount) === NaN) {
   	console.log(`Параметр "Процентная ставка" содержит неправильное значение "${amount}"`);
