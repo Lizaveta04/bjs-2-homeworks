@@ -35,6 +35,7 @@ function getArrayParams(arr) {
 
 }
 
+
 // Задание 2
 
 //Напишите функцию worker, которая должна находить сумму элементов массива и возвращать её ("насадка мясорубки").
@@ -65,6 +66,7 @@ function makeWork(arrOfArr, func) {
   return max;
  
 }
+
 
 // Задание 3
 
