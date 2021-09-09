@@ -38,6 +38,7 @@ function getArrayParams(arr) {
 // Задание 2
 
 //Напишите функцию worker, которая должна находить сумму элементов массива и возвращать её ("насадка мясорубки").
+
 function worker(arr) {
   let sum = 0;
 
@@ -48,22 +49,6 @@ function worker(arr) {
   return sum;
 }
 
-//Функция makeWork принимает входные данные: массив массивов (мясо) и функцию worker, таким образом makeWork - функция высшего порядка.
-function makeWork(arrOfArr, func) {
-
-  let max = worker(arrOfArr[0]);
-
-  //Итерируйтесь по массиву arrOfArr с помощью цикла, выполняя worker для каждого элемента (находя сумму), и если она больше ранее найденного максимума - присваивайте max = sum.
-  for (let i = 0; i < arrOfArr.length; i++) {
-
-  	if (worker(arrOfArr[i]) > max) {
-  		max = worker(arrOfArr[i]);
-  	}
-  }
-  
-  return max;
- 
-}
 
 // Задание 3
 
@@ -88,17 +73,24 @@ function worker2(arr) {
 }
 
 //Затем используйте данную насадку как аргумент для функции makeWork.
+
+
+//Функция makeWork принимает входные данные: массив массивов (мясо) и функцию worker, таким образом makeWork - функция высшего порядка.
 function makeWork(arrOfArr, func) {
 
-  let max = worker2(arrOfArr[0]);
+  let max = func(arrOfArr[0]);
 
+  //Итерируйтесь по массиву arrOfArr с помощью цикла, выполняя worker для каждого элемента (находя сумму), и если она больше ранее найденного максимума - присваивайте max = sum.
   for (let i = 0; i < arrOfArr.length; i++) {
 
-  	if (worker2(arrOfArr[i]) > max) {
-  		max = worker2(arrOfArr[i]);
+  	if (func(arrOfArr[i]) > max) {
+  		max = func(arrOfArr[i]);
   	}
   }
   
   return max;
  
 }
+
+
+
