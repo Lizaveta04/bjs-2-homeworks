@@ -26,19 +26,19 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   //и выдавать сумму (totalAmount), которую в итоге заплатит клиент (первоначальный взнос, погашение основного долга, проценты за пользование кредитом).
   
   //Если параметр функции будет строкой, то попытайтесь преобразовать в число. Во всех остальных случаях возвращайте строку: “Параметр <название параметра> содержит неправильное значение <значение параметра>”.
-  parseInt(percent);
-  if (Number.isNaN(percent) === NaN) {
-  	console.log(`Параметр "Процентная ставка" содержит неправильное значение "${percent}"`);
+  let p = parseInt(percent);
+  if (Number.isNaN(p)) {
+  	return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
   } 
 
-  parseInt(contribution);
-  if (Number.isNaN(contribution) === NaN) {
-  	console.log(`Параметр "Процентная ставка" содержит неправильное значение "${contribution}"`);
+  let c = parseInt(contribution);
+  if (Number.isNaN(c)) {
+  	return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
   } 
   
-  parseInt(amount);
-  if (Number.isNaN(amount) === NaN) {
-  	console.log(`Параметр "Процентная ставка" содержит неправильное значение "${amount}"`);
+  let a = parseInt(amount);
+  if (Number.isNaN(a)) {
+  	return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
   } 
  
   // S - тело кредита или основной долг - сумма, которую необходимо вернуть банку (сумма кредита минус первоначальный взнос).
