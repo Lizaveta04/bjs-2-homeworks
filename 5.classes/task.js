@@ -74,16 +74,16 @@ class Library {
 		}
 	}
 	findBookBy(type, value) {
-		for (let i = 0; i < this.books.length, i ++) {
-			if (this.books[i].name = this.books[i].value) {
+		for (let i = 0; i < this.books.length; i ++) {
+			if (this.books[i].type === type && this.books[i].value === value) {
 				return this.books[i];
-			} else {
+		} else {
 				return null;
 			}
 		}
 	}
 	giveBookByName(bookName) {
-		for (let i = 0; i < this.books.length, i ++) {
+		for (let i = 0; i < this.books.length; i ++) {
 			if (this.books[i].name === bookName) {
 				return this.books.splice(i, 1);
 			} else {
@@ -95,18 +95,20 @@ class Library {
 
 //Задача 3
 class Student {
-	constructor(firstName, lastName) {
+	constructor(firstName, lastName, marks, subject) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.marks = [];
+		this.subject = subject;
 	}
 	addMark(mark, subject) {
-		let marks = [];
-		if (mark > 1 && mark < 5) {
-			marks.push(mark);
+		if (mark >= 1 && mark <= 5) {
+			this.marks.push(mark);
 		} else {
 			return "Ошибка, оценка должна быть числом от 1 до 5";
 		}
-		if (subject === undefined) {
+
+		if (this.subject === undefined) {
 			return "Несуществующий предмет";
 		}
 	}
@@ -114,10 +116,10 @@ class Student {
 		let sum = 0;
 		let n = this.marks.length;
 		let avg = sum / n;
-		for (let i = 0; i < this.marks, i++) {
-			if (subject === undefined) {
+		for (let i = 0; i < this.marks.length; i++) {
+			if (this.subject === undefined) {
 				return 0;
-			} else if {
+			} else {
 				sum += this.marks[i];
 			}
 		}
@@ -125,5 +127,5 @@ class Student {
 	}
 	getAverage(){
 
-	}
+	}	
 }
