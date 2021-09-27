@@ -38,33 +38,37 @@ class AlarmClock {
 	start() {
 		//Создайте функцию проверки (checkClock), которая принимает звонок и проверяет: если текущее время совпадает со временем звонка, то вызывайте колбек.
 		const checkClock = (clock) => {
-			this.getCurrentFormattedTime === clock.time;
-			callback(clock);
+			if (this.getCurrentFormattedTime === clock.time) {
+				return clock.callback;
+			}
 		}
 		//Если значение идентификатора текущего таймера отсутствует, то создайте новый интервал.
 		//В этом интервале реализуйте функцию, которая будет перебирать все звонки, и для каждого вызывать функцию checkClock.
 		//Результат функции setInterval сохраните в свойстве идентификатора текущего таймера.
 		if (this.timerId === undefined) {
-			const func = (clock) => {
-				this.alarmCollection.every((clock) => checkClock(clock));
-			}
-			return this.timerId = setInterval(func);
+			setInterval(() => {
+				const func = (clock) => {
+					let result = this.alarmCollection.forEach(checkClock);
+				}
+			});
+			return this.timerId = setInterval(result);
 		}
 	}
 	stop() {
 		//Сделайте проверку существования идентификатора текущего таймера.
 		//Если у идентификатора текущего таймера есть значение, то вызовите функцию clearInterval для удаления интервала, а так же удалите значение из свойства "идентификатор текущего таймера".
-		if (this.timerId === !undefined) {
-			clearInterval();
-			delete this.timerId;
+		if (this.timerId) {
+			clearInterval(this.timerId);
+			this.timerId = null;
 		}
+		return;
 	}
 	printAlarms() {
-		//С помощью метода forEach выведите информацию о каждом звонке (id и time).
+		return this.alarmCollection.forEach(clock);
 	}
 	clearAlarms() {
 		//Вызывает метод остановки интервала.
 		//Удаляет все звонки.
-		clearInterval();
+		clearInterval(this.timerId);
 	}
 }

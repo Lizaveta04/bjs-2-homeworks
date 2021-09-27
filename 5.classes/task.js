@@ -74,58 +74,61 @@ class Library {
 		}
 	}
 	findBookBy(type, value) {
-		for (let i = 0; i < this.books.length; i ++) {
-			if (this.books[i].type === type && this.books[i].value === value) {
+		for (let i = 0; i < this.books.length; i++) {
+			if (this.books[i][type] === value) {
 				return this.books[i];
-		} else {
-				return null;
-			}
+			} 
+		return null;
 		}
 	}
 	giveBookByName(bookName) {
-		for (let i = 0; i < this.books.length; i ++) {
+		for (let i = 0; i < this.books.length; i++) {
 			if (this.books[i].name === bookName) {
-				return this.books.splice(i, 1);
-			} else {
-				return null;
+				let arr = this.books.splice(i, 1);
+				return arr[i];
 			}
 		}
+		return null;
 	}
 }
 
 //Задача 3
 class Student {
-	constructor(firstName, lastName, marks, subject) {
+	constructor(firstName, lastName, subject) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.marks = [];
 		this.subject = subject;
 	}
-	addMark(mark, subject) {
-		if (mark >= 1 && mark <= 5) {
-			this.marks.push(mark);
+	addMark(mark, subjectName) {
+		if (this.subject[subjectName] === undefined) {
+			this.subject[subjectName] = [];
+		}
+		
+		if (mark < 1 || mark > 5) {
+			return 'Ошибка, оценка должна быть числом от 1 до 5.'
 		} else {
-			return "Ошибка, оценка должна быть числом от 1 до 5";
-		}
-
-		if (this.subject === undefined) {
-			return "Несуществующий предмет";
+			this.subject[subjectName].push(mark); 
 		}
 	}
-	getAverageBySubject(subject) {
+	getAverageBySubject(subjectName) {
+		if (this.subjectName === undefined) {
+			return 'Несуществующий предмет';
+		}
 		let sum = 0;
-		let n = this.marks.length;
-		let avg = sum / n;
-		for (let i = 0; i < this.marks.length; i++) {
-			if (this.subject === undefined) {
-				return 0;
-			} else {
-				sum += this.marks[i];
-			}
+		for (let i = 0; i < this.subject[subjectName].length; i++) {
+			sum += this.subject[subjectName][i];
 		}
-		return avg;
+		let n = this.subject[subjectName].length;
+		let avg = sum / n;
+		return avg;		
 	}
-	getAverage(){
-
+	getAverage() {
+		let sum = 0;
+		for (let i = 0; i < this.subject[subjectName].length; i++) {
+			sum += this.subject[subjectName][i];
+		}
+		let n = this.subject[subjectName].length;
+		let avg = sum / n;
+		return avg;	
 	}	
 }
