@@ -94,24 +94,22 @@ class Library {
 
 //Задача 3
 class Student {
-	constructor(firstName, lastName, subject) {
+	constructor(firstName, lastName, subject, markList) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.subject = subject;
+		this.subject = {};
 	}
 	addMark(mark, subjectName) {
 		if (this.subject[subjectName] === undefined) {
 			this.subject[subjectName] = [];
 		}
-		
 		if (mark < 1 || mark > 5) {
 			return 'Ошибка, оценка должна быть числом от 1 до 5.'
-		} else {
-			this.subject[subjectName].push(mark); 
-		}
+		} 
+		this.subject[subjectName].push(mark); 
 	}
 	getAverageBySubject(subjectName) {
-		if (this.subjectName === undefined) {
+		if (subjectName === undefined) {
 			return 'Несуществующий предмет';
 		}
 		let sum = 0;
@@ -124,11 +122,15 @@ class Student {
 	}
 	getAverage() {
 		let sum = 0;
-		for (let i = 0; i < this.subject[subjectName].length; i++) {
-			sum += this.subject[subjectName][i];
+		let marks = Object.values(this.subject);
+		for (let i = 0; i < marks.length; i++) {
+			let markList = marks[i];
+			for (let c = 0; c < markList.length; c++) {
+				sum += markList[c];
+			}
 		}
-		let n = this.subject[subjectName].length;
+		let n = marks.length;
 		let avg = sum / n;
 		return avg;	
-	}	
+	}
 }
