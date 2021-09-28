@@ -94,23 +94,23 @@ class Library {
 
 //Задача 3
 class Student {
-	constructor(firstName, lastName, subject, markList) {
+	constructor(firstName, lastName, subject) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.subject = {};
 	}
 	addMark(mark, subjectName) {
-		if (this.subject[subjectName] === undefined) {
-			this.subject[subjectName] = [];
-		}
 		if (mark < 1 || mark > 5) {
 			return 'Ошибка, оценка должна быть числом от 1 до 5.'
 		} 
+		if (this.subject[subjectName] === undefined) {
+			this.subject[subjectName] = [];
+		}
 		this.subject[subjectName].push(mark); 
 	}
 	getAverageBySubject(subjectName) {
 		if (subjectName === undefined) {
-			return 'Несуществующий предмет';
+			return 'Несуществующий предмет.';
 		}
 		let sum = 0;
 		for (let i = 0; i < this.subject[subjectName].length; i++) {
