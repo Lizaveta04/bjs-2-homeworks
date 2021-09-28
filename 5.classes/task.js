@@ -122,14 +122,15 @@ class Student {
 	}
 	getAverage() {
 		let sum = 0;
+		let n = 0;
 		let marks = Object.values(this.subject);
 		for (let i = 0; i < marks.length; i++) {
 			let markList = marks[i];
-			for (let c = 0; c < markList.length; c++) {
-				sum += markList[c];
+			n += marks.length;
+			for (let j = 0; j < markList.length; j++) {
+				sum += markList[j];
 			}
 		}
-		let n = marks.length;
 		let avg = sum / n;
 		return avg;	
 	}
