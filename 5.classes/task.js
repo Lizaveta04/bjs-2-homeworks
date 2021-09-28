@@ -124,7 +124,7 @@ class Student {
 		let sum = 0;
 		let n = 0;
 		let marks = Object.values(this.subject);
-		for (let c = 0; i < marks.length; i++) {
+		for (let i = 0; i < marks.length; i++) {
 			let markList = marks[i];
 			n += marks.length;
 			for (let j = 0; j < markList.length; j++) {
