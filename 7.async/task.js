@@ -32,12 +32,11 @@ class AlarmClock {
 		//Удалите из массива звонков тот, у которого id совпадает с текущим. Например, можно использовать метод filter.
 		//Верните логическое значение об успешности/провале удаления объекта звонка из общего массива.
 		let clockStorage = this.alarmCollection.length;
-		let newClockStorage = this.alarmCollection.filter((clock) => clock.id === id);
-		if (clockStorage !== newClockStorage.length) {
+		this.alarmCollection = this.alarmCollection.filter((clock) => clock.id !== id);
+		let newClockStorage = this.alarmCollection.length;
+		if (clockStorage !== newClockStorage) {
 			return true;
-		} else {
-			return false;
-		}
+		} 
 	}
 	getCurrentFormattedTime() { //Возвращает текущее время в строковом формате HH:MM.
 		return new Date().toLocaleTimeString("ru-Ru", {
@@ -48,7 +47,7 @@ class AlarmClock {
 	start()	{ //Запускает все звонки.
 		//Создайте функцию проверки (checkClock), которая принимает звонок и проверяет: если текущее время совпадает со временем звонка, то вызывайте колбек.
 		const checkClock = (clock) => {
-			if (clock.getCurrentFormattedTime() === clock.time) {
+			if (this.getCurrentFormattedTime() === clock.time) {
 				return clock.callback();
 			}
 		}
@@ -56,7 +55,7 @@ class AlarmClock {
 		//В этом интервале реализуйте функцию, которая будет перебирать все звонки, и для каждого вызывать функцию checkClock.
 		//Результат функции setInterval сохраните в свойстве идентификатора текущего таймера.
 		if (this.timerId === null) {
-			const func = () => this.alarmCollection.forEach((clock) => clock.checkClock());
+			const func = () => this.alarmCollection.forEach((clock) => checkClock(clock));
 			return this.timerId = setInterval(func);
 		}
 	}
@@ -67,11 +66,10 @@ class AlarmClock {
 			clearInterval(this.timerId);
 			this.timerId = null;
 		}
-		return;
 	}
 	printAlarms() { //Печатает все звонки.
 		//С помощью метода forEach выведите информацию о каждом звонке (id и time).
-		return this.alarmCollection.forEach((clock) => {
+		this.alarmCollection.forEach((clock) => {
 			console.log('Параметр идентификатора создаваемого звонка: ' + clock.id + ', параметр времени: ' + clock.time + '.');
 		});
 	}
@@ -79,6 +77,6 @@ class AlarmClock {
 		//Вызывает метод остановки интервала.
 		clearInterval(this.timerId);
 		//Удаляет все звонки.
-		this.alarmCollection.length = 0;
+		this.alarmCollection = [];
 	}
 }
