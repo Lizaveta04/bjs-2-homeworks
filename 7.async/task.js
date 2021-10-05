@@ -34,9 +34,7 @@ class AlarmClock {
 		let clockStorage = this.alarmCollection.length;
 		this.alarmCollection = this.alarmCollection.filter((clock) => clock.id !== id);
 		let newClockStorage = this.alarmCollection.length;
-		if (clockStorage !== newClockStorage) {
-			return true;
-		} 
+		return clockStorage !== newClockStorage;
 	}
 	getCurrentFormattedTime() { //Возвращает текущее время в строковом формате HH:MM.
 		return new Date().toLocaleTimeString("ru-Ru", {
