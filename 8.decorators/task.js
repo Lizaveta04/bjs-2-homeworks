@@ -1,32 +1,53 @@
+const hash = (args) => args.join(',');
 function cachingDecoratorNew(func) {
-  let cache = [
-    //{ hash: "10,20,30", value: 60 },
-    //{ hash: "2,2,2", value: 6 },
-  ];
+  let cache = {};
   function wrapper(...rest) {
-    const hash = (args) => args.join(','); // получаем правильный хэш
-    let idx = cache.findIndex((item) => item.hash === hash(rest)); // ищем элемент, хэш которого равен нашему хэшу
-    if (idx !== -1) { // если элемент не найден
-      console.log("Из кэша: " + cache[hash(rest)]); // индекс нам известен, по индексу в массиве лежит объект, как получить нужное значение?
-      return "Из кэша: " + cache[hash(rest)];
+    let key = hash(rest);
+    if (key in cache) {
+      console.log("Из кэша: " + cache[key]);
+      return "Из кэша: " + cache[key];
+    } 
+    if (Object.keys(cache).lenght > 5) {
+      delete cache[Object.keys(cache)[0]];
     }
-    let result = func(...rest); // в кэше результата нет - придётся считать
-    for (let i = 0; i < cache.length; i++) {
-      cache.push(cache[i]); // добавляем элемент с правильной структурой
-    }
-    if (cache.length > 5) {
-        cache.shift(); // если слишком много элементов в кэше надо удалить самый старый (первый)
-    }
+    let result = func(...rest);
+    cache[key] = result;
     console.log("Вычисляем: " + result);
-    return "Вычисляем: " + result;  
+    return "Вычисляем: " + result;
   }
   return wrapper;
 }
 
-function debounceDecoratorNew(func) {
-  // Ваш код
+
+function debounceDecoratorNew(func, timeout) {
+  let lastCallArgs;
+  let timer;
+  let flag = false;
+  function wrapper(...rest) {
+    lastCallArgs = rest;
+    if (!flag) {
+      flag = true;
+      timer = setTimeout(() => {
+        func(...lastCallArgs);
+        flag = false;
+      }, timeout);
+    } else {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...lastCallArgs);
+        flag = false;
+      }, timeout);
+    }
+  }
+  return wrapper;
 }
 
+
 function debounceDecorator2(func) {
-  // Ваш код
+  function wrapper(...args) {
+    wrapper.count.push(args);
+    func(...args);
+  }
+  wrapper.count = [];
+  return wrapper;
 }
