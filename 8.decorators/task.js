@@ -26,6 +26,7 @@ function debounceDecoratorNew(func, timeout) {
   function wrapper(...rest) {
     lastCallArgs = rest;
     if (!flag) {
+      func(...rest);
       flag = true;
       timer = setTimeout(() => {
         func(...lastCallArgs);
@@ -44,9 +45,39 @@ function debounceDecoratorNew(func, timeout) {
 
 
 function debounceDecorator2(func) {
+  let lastCallArgs;
+  let timer;
+  let flag = false;
+  function wrapper(count, ...rest) {
+    count = 0;
+    lastCallArgs = rest;
+    if (!flag) {
+      func(...rest);
+      count++;
+      flag = true;
+      timer = setTimeout(() => {
+        func(...lastCallArgs);
+        count++;
+        flag = false;
+      }, timeout);
+    } else {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...lastCallArgs);
+        count++;
+        flag = false;
+      }, timeout);
+    }
+  }
+  return wrapper;
+}
+
+
+function debounceDecorator2(func) {
   function wrapper(...args) {
     wrapper.count.push(args);
     func(...args);
+    return wrapper.count.length;
   }
   wrapper.count = [];
   return wrapper;
