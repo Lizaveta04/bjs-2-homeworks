@@ -26,8 +26,8 @@ function debounceDecoratorNew(func, timeout) {
   function wrapper(...rest) {
     lastCallArgs = rest;
     if (!flag) {
-      func(...rest);
       flag = true;
+      func(...rest);
       timer = setTimeout(() => {
         func(...lastCallArgs);
         flag = false;
