@@ -27,11 +27,11 @@ function debounceDecoratorNew(func, timeout) {
     lastCallArgs = rest;
     if (!flag) {
       flag = true;
-      func(...rest);
       timer = setTimeout(() => {
         func(...lastCallArgs);
         flag = false;
       }, timeout);
+      return func(...rest);
     } else {
       clearTimeout(timer);
       timer = setTimeout(() => {
@@ -44,41 +44,29 @@ function debounceDecoratorNew(func, timeout) {
 }
 
 
-function debounceDecorator2(func) {
+function debounceDecorator2(func, timeout) {
   let lastCallArgs;
   let timer;
   let flag = false;
-  function wrapper(count, ...rest) {
-    count = 0;
+  let count;
+    function wrapper(count, ...rest) {
     lastCallArgs = rest;
     if (!flag) {
-      func(...rest);
-      count++;
       flag = true;
       timer = setTimeout(() => {
         func(...lastCallArgs);
-        count++;
         flag = false;
       }, timeout);
+      return func(...rest);
     } else {
       clearTimeout(timer);
       timer = setTimeout(() => {
         func(...lastCallArgs);
-        count++;
         flag = false;
       }, timeout);
     }
   }
   return wrapper;
-}
-
-
-function debounceDecorator2(func) {
-  function wrapper(...args) {
-    wrapper.count.push(args);
-    func(...args);
-    return wrapper.count.length;
-  }
-  wrapper.count = [];
-  return wrapper;
+  wrapper.count = 0;
+  return 'Кол-во вызовов: ' + wrapper.count++;
 }
