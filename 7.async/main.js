@@ -1,3 +1,4 @@
+//Функция проверки.
 function testCase() {
 	let phoneAlarm;
 	phoneAlarm = new AlarmClock();
@@ -16,3 +17,4 @@ function testCase() {
 	phoneAlarm.printAlarms();
 	phoneAlarm.start();
 }
+testCase();
