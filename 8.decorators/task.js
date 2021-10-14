@@ -48,8 +48,8 @@ function debounceDecorator2(func, timeout) {
   let lastCallArgs;
   let timer;
   let flag = false;
-  let count;
-    function wrapper(count, ...rest) {
+  wrapper.count = 0;
+  function wrapper(count, ...rest) {
     lastCallArgs = rest;
     if (!flag) {
       flag = true;
@@ -65,8 +65,7 @@ function debounceDecorator2(func, timeout) {
         flag = false;
       }, timeout);
     }
+    console.log('Кол-во вызовов: ' + wrapper.count++);
   }
   return wrapper;
-  wrapper.count = 0;
-  return 'Кол-во вызовов: ' + wrapper.count++;
 }
