@@ -54,7 +54,7 @@ class AlarmClock {
 		//Результат функции setInterval сохраните в свойстве идентификатора текущего таймера.
 		if (this.timerId === null) {
 			const func = () => this.alarmCollection.forEach((clock) => checkClock(clock));
-			return this.timerId = setInterval(func);
+			return this.timerId = setInterval(func, 1000);
 		}
 	}
 	stop() { //Останавливает выполнение всех звонков.
