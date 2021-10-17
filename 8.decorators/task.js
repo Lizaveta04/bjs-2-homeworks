@@ -54,18 +54,20 @@ function debounceDecorator2(func, timeout) {
     if (!flag) {
       flag = true;
       timer = setTimeout(() => {
+      	console.log('Кол-во вызовов: ' + wrapper.count++);
         func(...lastCallArgs);
         flag = false;
       }, timeout);
+      console.log('Кол-во вызовов: ' + wrapper.count++);
       return func(...rest);
     } else {
       clearTimeout(timer);
       timer = setTimeout(() => {
+      	console.log('Кол-во вызовов: ' + wrapper.count++);
         func(...lastCallArgs);
         flag = false;
       }, timeout);
     }
-    console.log('Кол-во вызовов: ' + wrapper.count++);
   }
   return wrapper;
 }
