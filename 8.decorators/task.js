@@ -49,21 +49,21 @@ function debounceDecorator2(func, timeout) {
   let timer;
   let flag = false;
   wrapper.count = 0;
-  function wrapper(count, ...rest) {
+  function wrapper(...rest) {
     lastCallArgs = rest;
     if (!flag) {
       flag = true;
       timer = setTimeout(() => {
-      	console.log('Кол-во вызовов: ' + wrapper.count++);
+      	console.log('Кол-во вызовов: ' + ++wrapper.count);
         func(...lastCallArgs);
         flag = false;
       }, timeout);
-      console.log('Кол-во вызовов: ' + wrapper.count++);
+      console.log('Кол-во вызовов: ' + ++wrapper.count);
       return func(...rest);
     } else {
       clearTimeout(timer);
       timer = setTimeout(() => {
-      	console.log('Кол-во вызовов: ' + wrapper.count++);
+      	console.log('Кол-во вызовов: ' + ++wrapper.count);
         func(...lastCallArgs);
         flag = false;
       }, timeout);
